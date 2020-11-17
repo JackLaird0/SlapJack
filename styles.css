@@ -1,0 +1,32 @@
+body {
+  background: rgb(181, 34, 195);
+  background: linear-gradient(
+    0deg,
+    rgba(181, 34, 195, 1) 0%,
+    rgba(253, 187, 45, 1) 50%,
+    rgba(139, 238, 68, 1) 99%
+  );
+  min-height: 100vh;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.card-back {
+  height: 345px;
+  width: 245px;
+  border-radius: 7px;
+}
+
+.center-deck {
+  box-shadow: -10px 4px 1px #c1f9f1;
+}
+
+.wins {
+  color: #fff;
+}
