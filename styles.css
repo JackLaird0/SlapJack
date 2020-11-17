@@ -23,8 +23,23 @@ body {
   border-radius: 7px;
 }
 
+.player-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.p1-card {
+  box-shadow: 0px 0px 6px 5px #f045ae;
+}
+
+.p2-card {
+  box-shadow: 0px 0px 6px 5px #56e943;
+}
+
 .center-deck {
   box-shadow: -10px 4px 1px #c1f9f1;
+  margin-top: -45px;
 }
 
 .wins {
