@@ -1,6 +1,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap"
+      rel="stylesheet"
+    />
     <link href="./styles.css" type="text/css" rel="stylesheet" />
     <title>Slap Jack</title>
     <meta name="description" content="The HTML5 Herald" />
@@ -9,12 +14,14 @@
     <!-- <link rel="stylesheet" href="css/styles.css?v=1.0" /> -->
   </head>
   <body>
+    <p class="game-text">Welcome to Slapjack</p>
     <div class="game-container">
       <div class="player-container">
         <img
           src="./assets/back.png"
           alt="card back"
-          class="card-back p1-card"
+          class="card-back p1-card turn-animation"
+          id="playerOne"
         />
         <p class="wins">0 WINS</p>
       </div>
@@ -30,6 +37,7 @@
           src="./assets/back.png"
           alt="card back"
           class="card-back p2-card"
+          id="playerTwo"
         />
         <p class="wins">0 WINS</p>
       </div>
