@@ -1,5 +1,3 @@
-const Player = require("./player");
-
 class Game {
   constructor() {
     this.cards = [];
@@ -37,7 +35,6 @@ class Game {
     });
     let cards = this.shuffle(deck);
     this.cards = cards;
-    console.log(this.cards);
   }
 
   shuffle(cards) {
@@ -63,13 +60,14 @@ class Game {
     return { deckOne, deckTwo };
   }
 
-  createPlayers(deckOne, deckTwo) {
+  createPlayers() {
     const splitDecks = this.splitDeck(this.cards);
     const { deckOne, deckTwo } = splitDecks;
     const playerOne = new Player(1, deckOne);
     const playerTwo = new Player(2, deckTwo);
     this.playerOne = playerOne;
     this.playerTwo = playerTwo;
+    console.log(this.playerOne);
   }
 
   gameStart() {
@@ -78,7 +76,7 @@ class Game {
   }
 
   dealCard(player) {
-    const cardPlayed = player.hand.pop();
+    const cardPlayed = this[player].hand.pop();
     this.centerDeck.push(cardPlayed);
   }
 
@@ -86,29 +84,31 @@ class Game {
     const deckLength = this.centerDeck.length;
     const slapperHand = this[slapper].hand;
     const altHand = this[altPlayer].hand;
+    console.log(slapperHand);
     if (
+      deckLength > 1 &&
       this.centerDeck[deckLength - 1].value ===
-      this.centerDeck[deckLength - 2].value
+        this.centerDeck[deckLength - 2].value
     ) {
       slapperHand.push(this.centerDeck);
-      slapperHand = this.shuffle(slapperHand);
+      this[slapper].hand = this.shuffle(slapperHand);
       this.centerDeck = [];
     } else if (
+      deckLength > 2 &&
       this.centerDeck[deckLength - 1].value ===
-      this.centerDeck[deckLength - 3].value
+        this.centerDeck[deckLength - 3].value
     ) {
       slapperHand.push(this.centerDeck);
-      slapperHand = this.shuffle(slapperHand);
+      this[slapper].hand = this.shuffle(slapperHand);
       this.centerDeck = [];
     } else if (this.centerDeck[deckLength - 1].value === "jack") {
       slapperHand.push(this.centerDeck);
-      slapperHand = this.shuffle(slapperHand);
+      this[slapper].hand = this.shuffle(slapperHand);
       this.centerDeck = [];
     } else {
       const addedCard = slapperHand.pop();
       altHand.unshift(addedCard);
     }
+    console.log(this.centerDeck);
   }
 }
-
-module.exports = Game;

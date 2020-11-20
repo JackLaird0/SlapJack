@@ -5,5 +5,3 @@ class Player {
     this.hand = hand;
   }
 }
-
-module.exports = Player;
