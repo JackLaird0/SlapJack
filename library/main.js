@@ -1,4 +1,5 @@
 const centerDeck = document.querySelector(".center-deck");
+const gameText = document.querySelector(".game-text");
 
 document.addEventListener("keydown", (event) =>
   keydownHandler(event, "p1", "p2")
@@ -11,10 +12,6 @@ const game = new Game();
 
 game.gameStart();
 
-function gameStart() {
-  Game.createDeck();
-}
-
 function keydownHandler(e, p, alt) {
   e.preventDefault();
 
@@ -25,12 +22,21 @@ function keydownHandler(e, p, alt) {
   };
 
   if (e.keyCode === playerInfo.deal[p]) {
-    game.dealCard(playerInfo.player[p]);
+    game.dealCard(playerInfo.player[p], playerInfo.player[alt]);
     addToCenter(p, alt);
+    changeCardAnimation(playerInfo.player[p], playerInfo.player[alt]);
   } else if (e.keyCode === playerInfo.slap[p]) {
     game.playerSlap(playerInfo.player[p], playerInfo.player[alt]);
     addToCenter(p, alt);
+    gameText.innerText = game.gameMessage;
   }
+}
+
+function changeCardAnimation(p, alt) {
+  const currentPlayerCard = document.querySelector(`#${p}`);
+  const altPlayerCard = document.querySelector(`#${alt}`);
+  currentPlayerCard.classList.remove("turn-animation");
+  altPlayerCard.classList.add("turn-animation");
 }
 
 function addToCenter(p, alt) {
