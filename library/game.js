@@ -5,6 +5,7 @@ class Game {
     this.playerTwo = {};
     this.gameState = "playerOne";
     this.centerDeck = [];
+    this.gameMessage = "";
   }
 
   // top of deck will be the highest index bottom is 0
@@ -63,11 +64,10 @@ class Game {
   createPlayers() {
     const splitDecks = this.splitDeck(this.cards);
     const { deckOne, deckTwo } = splitDecks;
-    const playerOne = new Player(1, deckOne);
-    const playerTwo = new Player(2, deckTwo);
+    const playerOne = new Player(1, deckOne, "Player One");
+    const playerTwo = new Player(2, deckTwo, "Player Two");
     this.playerOne = playerOne;
     this.playerTwo = playerTwo;
-    console.log(this.playerOne);
   }
 
   gameStart() {
@@ -75,9 +75,12 @@ class Game {
     this.createPlayers();
   }
 
-  dealCard(player) {
-    const cardPlayed = this[player].hand.pop();
-    this.centerDeck.push(cardPlayed);
+  dealCard(player, alt) {
+    if (this.gameState === player) {
+      const cardPlayed = this[player].hand.pop();
+      this.centerDeck.push(cardPlayed);
+      this.gameState = alt;
+    }
   }
 
   playerSlap(slapper, altPlayer) {
@@ -92,6 +95,9 @@ class Game {
     ) {
       slapperHand.push(this.centerDeck);
       this[slapper].hand = this.shuffle(slapperHand);
+      this.gameMessage = `${this[slapper].name} slapped on a double. They got ${
+        deckLength - 1
+      } cards!`;
       this.centerDeck = [];
     } else if (
       deckLength > 2 &&
@@ -100,15 +106,21 @@ class Game {
     ) {
       slapperHand.push(this.centerDeck);
       this[slapper].hand = this.shuffle(slapperHand);
+      this.gameMessage = `${
+        this[slapper].name
+      } slapped on a sandwhich. They got ${deckLength - 1} cards!`;
       this.centerDeck = [];
     } else if (this.centerDeck[deckLength - 1].value === "jack") {
       slapperHand.push(this.centerDeck);
       this[slapper].hand = this.shuffle(slapperHand);
+      this.gameMessage = `${this[slapper].name} slapped on a Jack. They got ${
+        deckLength - 1
+      } cards!`;
       this.centerDeck = [];
     } else {
       const addedCard = slapperHand.pop();
       altHand.unshift(addedCard);
+      this.gameMessage = `${this[slapper].name} had a bad slap. ${this[altPlayer].name} stole a card from ${this[slapper].name}`;
     }
-    console.log(this.centerDeck);
   }
 }
