@@ -18,7 +18,7 @@ function keydownHandler(e, p, alt) {
   const playerInfo = {
     player: { p1: "playerOne", p2: "playerTwo" },
     deal: { p1: 81, p2: 80 },
-    slap: { p1: 70, p2: 74 },
+    slap: { p1: 69, p2: 73 },
   };
 
   if (e.keyCode === playerInfo.deal[p]) {
