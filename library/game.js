@@ -8,8 +8,6 @@ class Game {
     this.gameMessage = "";
   }
 
-  // top of deck will be the highest index bottom is 0
-
   createDeck() {
     const suits = ["blue", "gold", "green", "red"];
     const values = [
@@ -87,7 +85,6 @@ class Game {
     const deckLength = this.centerDeck.length;
     const slapperHand = this[slapper].hand;
     const altHand = this[altPlayer].hand;
-    console.log(slapperHand);
     if (
       deckLength > 1 &&
       this.centerDeck[deckLength - 1].value ===
@@ -95,9 +92,7 @@ class Game {
     ) {
       slapperHand.push(this.centerDeck);
       this[slapper].hand = this.shuffle(slapperHand);
-      this.gameMessage = `${this[slapper].name} slapped on a double. They got ${
-        deckLength - 1
-      } cards!`;
+      this.gameMessage = `${this[slapper].name} slapped on a double. They got ${deckLength} cards!`;
       this.centerDeck = [];
     } else if (
       deckLength > 2 &&
@@ -106,16 +101,12 @@ class Game {
     ) {
       slapperHand.push(this.centerDeck);
       this[slapper].hand = this.shuffle(slapperHand);
-      this.gameMessage = `${
-        this[slapper].name
-      } slapped on a sandwhich. They got ${deckLength - 1} cards!`;
+      this.gameMessage = `${this[slapper].name} slapped on a sandwhich. They got ${deckLength} cards!`;
       this.centerDeck = [];
     } else if (this.centerDeck[deckLength - 1].value === "jack") {
       slapperHand.push(this.centerDeck);
       this[slapper].hand = this.shuffle(slapperHand);
-      this.gameMessage = `${this[slapper].name} slapped on a Jack. They got ${
-        deckLength - 1
-      } cards!`;
+      this.gameMessage = `${this[slapper].name} slapped on a Jack. They got ${deckLength} cards!`;
       this.centerDeck = [];
     } else {
       const addedCard = slapperHand.pop();
